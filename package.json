@@ -9,6 +9,7 @@
   "author": "Azsolt",
   "license": "ISC",
   "dependencies": {
+    "mqtt": "^2.16.0",
     "ws": "^4.1.0"
   }
 }
