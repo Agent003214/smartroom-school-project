@@ -13,3 +13,16 @@ client.on('message', function (topic, message) {
   console.log(topic.toString())
   //client.end()
 })
+
+//Semmi/teszt, szerintem így nem is mûködik
+client.on('connect', function () {
+    console.log('connect')
+    var lampa = client.subscribe('Neumann/SmartRoom/Livingroom/Ambient')
+    if (lampa==1) {
+        client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '0')
+    }
+    else if (lampa==0) {
+        client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '1')
+    }
+    
+})
