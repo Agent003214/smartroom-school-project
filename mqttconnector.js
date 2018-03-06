@@ -14,7 +14,12 @@ client.on('message', function (topic, message) {
   //client.end()   /test/temp
 })
 
-//Semmi/teszt, szerintem �gy nem is m�k�dik
+//Semmi/teszt, szerintem így nem is mûködik
+//Fölülírja a website-ot
+//ha minden kész:
+  //ha website-on fel/le kapcsoljuk a lámpát, akkor ezt a funkciót megállítja x ideig
+
+//lámpa automatika
 client.on('connect', function () {
     console.log('connect')
     var belsolampa = client.subscribe('Neumann/SmartRoom/Livingroom/Ambient')
@@ -23,10 +28,8 @@ client.on('connect', function () {
         client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '1')
         client.publish('Neumann/SmartRoom/Livingroom/Lamp/2', '1')
     }
-    else if (belsolampa==1 && kulsolampa==0) {
+    else if (belsolampa==0 && kulsolampa==1) {
         client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '0')
         client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '0')
     }
-    
-
 })
