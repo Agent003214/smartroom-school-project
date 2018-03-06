@@ -11,18 +11,22 @@ client.on('message', function (topic, message) {
   // message is Buffer
   console.log(message.toString())
   console.log(topic.toString())
-  //client.end()
+  //client.end()   /test/temp
 })
 
 //Semmi/teszt, szerintem így nem is mûködik
 client.on('connect', function () {
     console.log('connect')
-    var lampa = client.subscribe('Neumann/SmartRoom/Livingroom/Ambient')
-    if (lampa==1) {
+    var belsolampa = client.subscribe('Neumann/SmartRoom/Livingroom/Ambient')
+    var kulsolapma = client.subscribe('Neumann/SmartRoom/Frontyard/Ambient')
+    if (belsolampa==0 && kulsolampa==0) {
+        client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '1')
+        client.publish('Neumann/SmartRoom/Livingroom/Lamp/2', '1')
+    }
+    else if (belsolampa==1 && kulsolampa==0) {
+        client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '0')
         client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '0')
     }
-    else if (lampa==0) {
-        client.publish('Neumann/SmartRoom/Livingroom/Lamp/1', '1')
-    }
     
+
 })
